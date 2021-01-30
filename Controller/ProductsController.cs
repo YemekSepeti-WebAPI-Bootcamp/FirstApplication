@@ -10,43 +10,33 @@ namespace FirstApplication.Controller
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-
         //private readonly List<ProductModel> _data = new List<ProductModel>();
+        //private readonly DummyDataOld _dummyDataOld;
 
-        private readonly DummyDataOld _dummyDataOld;
+        private readonly IDatabase _database;
 
-        private readonly DummyDataNew _dummyDataNew;
-
-
-        public ProductsController(DummyDataNew dummyDataNew)
+        public ProductsController(IDatabase database)
         {
-           // _dummyDataOld = DummyDataOld.Instance;
-
-            _dummyDataNew = dummyDataNew;
+            _database = database;
         }
 
         [HttpGet]
         public List<ProductModel> Get()
         {
-
-            return _dummyDataNew.Products;
+            return _database.Products.ToList();
         }
 
         [HttpGet("{id}")]
-        public ProductModel Get( int id)
+        public ProductModel Get(int id)
         {
-            var data = _dummyDataNew.Products.FirstOrDefault(c => c.Id == id);
+            var data = _database.Products.FirstOrDefault(c => c.Id == id);
             return data;
         }
 
         [HttpPost]
         public void Post([FromBody] ProductModel product)
         {
-            _dummyDataNew.Products.Add(product);
+            _database.Products.Add(product);
         }
-
-
-
-
     }
 }

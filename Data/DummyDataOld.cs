@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace FirstApplication.Data
 {
-
     // singleton desing pattern
     public class DummyDataOld
     {
@@ -16,7 +15,7 @@ namespace FirstApplication.Data
             {
                 lock (padLock)
                 {
-                    if(_instance == null)
+                    if (_instance == null)
                     {
                         _instance = new DummyDataOld();
                     }
@@ -24,7 +23,6 @@ namespace FirstApplication.Data
                 return _instance;
             }
         }
-
 
         private DummyDataOld()
         {
@@ -40,6 +38,5 @@ namespace FirstApplication.Data
         }
 
         public List<ProductModel> Products = new List<ProductModel>();
-
     }
 }
